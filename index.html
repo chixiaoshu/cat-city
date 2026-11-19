@@ -7,7 +7,8 @@
   <meta name="description" content="An interactive short film: a sleeping paper cat unfolds into a miniature city of tiny cats, and folds back up at night." />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <!-- fonts load without blocking the page; if they can't be reached, system fonts are used -->
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" media="print" onload="this.media='all'" />
   <link rel="stylesheet" href="css/style.css" />
 </head>
 <body data-state="intro" data-tool="look">

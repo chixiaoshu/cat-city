@@ -308,7 +308,10 @@
       K.bubbleT -= dt;
       const v = new T.Vector3(K.x, K.y + 1.15, K.z).project(camera);
       const on = v.z < 1 && Math.abs(v.x) < 1.1 && Math.abs(v.y) < 1.1;
-      K.bubbleEl.style.transform = 'translate(' + ((v.x + 1) / 2) * innerWidth + 'px,' + ((1 - v.y) / 2) * innerHeight + 'px) translate(-50%, -100%)';
+      const half = (K.bubbleEl.offsetWidth || 160) / 2 + 8;
+      const bx = U.clamp(((v.x + 1) / 2) * innerWidth, half, innerWidth - half);
+      const by = Math.max(70, ((1 - v.y) / 2) * innerHeight);
+      K.bubbleEl.style.transform = 'translate(' + bx + 'px,' + by + 'px) translate(-50%, -100%)';
       if (K.bubbleT <= 0 || !on) K.bubbleEl.classList.remove('show');
     }
   };

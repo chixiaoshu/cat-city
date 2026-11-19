@@ -10,15 +10,22 @@
 
   // ------------------------------------------------------------ renderer
   const canvas = $('#scene');
+  // Lite mode for older / weaker phones: no shadows, no antialiasing, lower resolution.
+  // Force it with ?lite, or force full quality with ?hq.
+  const query = location.search || '';
+  const touch = 'ontouchstart' in window || (navigator.maxTouchPoints || 0) > 0;
+  const cores = navigator.hardwareConcurrency || 2;
+  const LITE = /[?&]lite\b/.test(query) || (!/[?&]hq\b/.test(query) && touch && cores <= 4);
+  CTC.lite = LITE;
   let renderer;
   try {
-    renderer = new T.WebGLRenderer({ canvas, antialias: true, powerPreference: 'high-performance' });
+    renderer = new T.WebGLRenderer({ canvas, antialias: !LITE, powerPreference: 'high-performance' });
   } catch (e) {
     $('#nogl').hidden = false;
     return;
   }
-  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.75));
-  renderer.shadowMap.enabled = true;
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, LITE ? 1.25 : 1.75));
+  renderer.shadowMap.enabled = !LITE;
   renderer.shadowMap.type = T.PCFSoftShadowMap;
   const scene = new T.Scene();
   const camera = new T.PerspectiveCamera(38, 1, 0.5, 700);

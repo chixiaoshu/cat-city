@@ -6,6 +6,11 @@ A sleeping paper cat unfolds, piece by piece, into a living miniature city of ti
 cats — and when night falls, the whole city folds itself back up into the cat.
 Everything is procedural: no images, no models, no audio files.
 
+**Watch it online:** https://chixiaoshu.github.io/cat-city/ (once GitHub Pages is
+switched on for this repository). Older or weaker phones automatically get a
+lighter mode without shadows; add `?lite` to the address to force it, or `?hq`
+to force full quality.
+
 **Run it:** open `index.html` in a browser. It uses plain scripts (no build step,
 no modules), so it works straight from disk or from any static host
 (`python3 -m http.server`, GitHub Pages, …). Needs WebGL.
