@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>CAT / TRANSFORM CITY</title>
+  <meta name="description" content="An interactive short film: a sleeping paper cat unfolds into a miniature city of tiny cats, and folds back up at night." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..800;1,9..144,300..800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-state="intro" data-tool="look">
+  <canvas id="scene" aria-label="An animated paper cat that becomes a city"></canvas>
+
+  <div id="grain" aria-hidden="true"></div>
+  <div id="vignette" aria-hidden="true"></div>
+  <div class="bar top" aria-hidden="true"></div>
+  <div class="bar bottom" aria-hidden="true"></div>
+
+  <!-- HUD -->
+  <header id="hud-top">
+    <div class="brand">
+      <span class="mark">CAT <i>/</i> TRANSFORM CITY</span>
+      <span id="chapter-name">I · The Sleeper</span>
+    </div>
+    <div class="right">
+      <button id="secrets-btn" title="Secrets found">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l2.2 6.6H21l-5.5 4 2.1 6.7L12 15.3 6.4 19.3l2.1-6.7L3 8.6h6.8z"/></svg>
+        <span id="secrets-count">0/7</span>
+      </button>
+      <div class="time"><span id="clock">02:36</span><span id="phase">night</span></div>
+    </div>
+  </header>
+
+  <nav id="dock" aria-label="Tools">
+    <button data-tool="look" class="on" title="Look &amp; touch (1)">
+      <svg viewBox="0 0 24 24"><path d="M8 12V5.5a1.5 1.5 0 013 0V11m0-1.5v-6a1.5 1.5 0 013 0V11m0-4.5a1.5 1.5 0 013 0V13m0-3.5a1.5 1.5 0 013 0V15a7 7 0 01-7 7h-1.5a7 7 0 01-5.6-2.8L3.6 16a1.6 1.6 0 012.5-2L8 15.5"/></svg>
+      <span>look</span>
+    </button>
+    <button data-tool="laser" title="Laser pointer (2)">
+      <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v4M12 18v4M2 12h4M18 12h4M5 5l2.6 2.6M16.4 16.4L19 19M19 5l-2.6 2.6M7.6 16.4L5 19"/></svg>
+      <span>laser</span>
+    </button>
+    <button data-tool="fish" title="Drop a fish (3)">
+      <svg viewBox="0 0 24 24"><path d="M2 12c3-4.5 7.5-6 12-4l4-3v14l-4-3c-4.5 2-9 .5-12-4z"/><circle cx="7" cy="11" r=".9"/></svg>
+      <span>fish</span>
+    </button>
+    <i class="sep"></i>
+    <button id="speed" title="Time speed (T)">
+      <svg viewBox="0 0 24 24"><path d="M4 6l7 6-7 6zM13 6l7 6-7 6z"/></svg>
+      <b>1×</b>
+    </button>
+    <button id="bell" title="Ring the Collar Bell: end the day (B)">
+      <svg viewBox="0 0 24 24"><path d="M6 17V11a6 6 0 0112 0v6l2 2H4zM10 21a2 2 0 004 0"/></svg>
+      <span>bell</span>
+    </button>
+    <button id="sound" title="Sound (M)">
+      <svg viewBox="0 0 24 24"><path d="M4 9h4l5-4v14l-5-4H4z"/><path class="wave" d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12"/><path class="x" d="M16 9l6 6M22 9l-6 6"/></svg>
+    </button>
+  </nav>
+
+  <div id="hint">
+    <div class="label">stroke the cat to wake it</div>
+    <div id="meter"><i></i></div>
+    <button id="wake-now">or skip to dawn →</button>
+  </div>
+
+  <div id="subtitle" aria-live="polite"></div>
+  <div id="chapter" aria-hidden="true"></div>
+  <div id="tooltip" role="status"></div>
+  <div id="toast" role="status"></div>
+
+  <aside id="secrets-panel">
+    <header><h2>Secrets of the city</h2><button id="secrets-close" aria-label="Close">×</button></header>
+    <ul id="secrets-list"></ul>
+  </aside>
+
+  <section id="intro">
+    <div class="inner">
+      <p class="kicker">an interactive short film in four folds</p>
+      <h1>CAT <span>/</span> TRANSFORM <em>CITY</em></h1>
+      <p class="lede">Every night a city folds itself up into a sleeping cat.<br />Every morning, the cat unfolds back into a city.</p>
+      <div class="actions">
+        <button id="begin">Begin <small>with sound</small></button>
+        <button id="begin-quiet" class="ghost">begin quietly</button>
+      </div>
+      <p class="credits">Procedurally folded from paper that does not exist · drag to look · scroll to zoom</p>
+    </div>
+  </section>
+
+  <div id="nogl" hidden>This film needs WebGL, which this browser doesn’t seem to provide.</div>
+
+  <script src="vendor/three.min.js"></script>
+  <script src="js/util.js"></script>
+  <script src="js/audio.js"></script>
+  <script src="js/world.js"></script>
+  <script src="js/citizens.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
