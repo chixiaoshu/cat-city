@@ -178,6 +178,8 @@
     a.path.push({ phi: sb, r });
     a.path.push({ phi, r });
   }
+  C.plan = plan;
+  C.spoke = spoke;
   function go(a, phi, r, activity, then, speed) {
     plan(a, phi, r);
     a.state = 'walk';

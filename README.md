@@ -42,6 +42,13 @@ in polar rings over the exact footprint of the curled cat.
 | heart | the **Purr Reactor**, which powers the windows at night |
 | the very end of the cat | the station canopy at **Tailbone Terminal** |
 
+## A visitor: Clawd
+
+Not everyone here is a cat. **Clawd** — built from voxels instead of paper —
+keeps watch beside the sleeping cat at night with a small lantern, steps back
+past the railway to watch the unfolding every morning, then tours the city all
+day (and chases the laser dot, without knowing why). Click Clawd to say hello.
+
 Hover anything to read what it was and what it is now (on the sleeping cat,
 hovering tells you what each part *will* become).
 
@@ -60,7 +67,7 @@ hovering tells you what each part *will* become).
 | `M` | sound on/off |
 | `Space` | (while asleep) wake the cat |
 
-There are **seven secrets**. The ★ counter in the corner gives hints.
+There are **eight secrets**. The ★ counter in the corner gives hints.
 
 ## How it's built
 
@@ -73,6 +80,7 @@ There are **seven secrets**. The ★ counter in the corner gives hints.
 - `js/citizens.js` — the residents (one `InstancedMesh`), polar-grid path
   finding along lanes and spokes, daily schedule, laser/fish chasing, the
   mouse and the box.
+- `js/clawd.js` — Clawd: night watch, viewing spot, city tour, speech bubbles.
 - `js/main.js` — story state machine, cinematic camera rig, input, tooltips,
   subtitles, chapter cards, secrets.
 - `js/audio.js` — Web Audio synthesis: purring (amplitude-modulated noise),

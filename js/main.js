@@ -27,6 +27,8 @@
   W.indexBuildings();
   C.build(scene);
   W.pickables.push(C.mesh);
+  const K = CTC.clawd;
+  K.build(scene);
 
   // ------------------------------------------------------------ story state
   const S = (CTC.state = {
@@ -159,6 +161,7 @@
     ['yarn', 'The Moon Is Yarn', 'Look up, at night.'],
     ['tail', 'Chasing Its Own Tail', 'The train gets ideas if you keep encouraging it.'],
     ['belly', 'Belly Rub', 'Rub the heart of the city. A lot.'],
+    ['clawd', 'Hello, Clawd', 'Someone around here is not a cat.'],
   ];
   function renderSecrets() {
     const n = Object.keys(S.secrets).length;
@@ -489,6 +492,11 @@
       return;
     }
     const inf = h.object.userData.info || {};
+    if (inf.clawd) {
+      K.poke(S);
+      secret('clawd');
+      return;
+    }
     if (inf.boop) {
       A.sneeze();
       setTimeout(() => {
@@ -716,6 +724,7 @@
     W.env(S.hour, camera);
     W.update(S.P, S.hour, dt, S.state);
     C.update(dt, S.hour, S.P, S.state);
+    K.update(dt, S, camera);
     camUpdate(dt);
     hover(dt);
 
@@ -785,6 +794,7 @@
         W.env(S.hour, camera);
         W.update(S.P, S.hour, step, S.state);
         C.update(step, S.hour, S.P, S.state);
+        K.update(step, S, camera);
         camUpdate(step);
         if (S.state !== last) {
           log.push(last + '→' + S.state + ' @h' + S.hour.toFixed(2));
